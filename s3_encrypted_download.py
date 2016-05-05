@@ -16,14 +16,14 @@ def build_parser():
            '''), 
         epilog = textwrap.dedent('''\
            Example of use: 
-           s3_encrypted_download.py -m master.key -u https://s3-us-west-2.amazonaws.com/cgl-driver-projects-encrypted/ucsf-pnoc/ucsf-fastq-20160318/C021_0006_RNA.tar.md5 -o decrypted.md5
+           s3_encrypted_download.py -m master.key -u https://s3-us-west-2.amazonaws.com/projects-encrypted/fastq.tar -o decrypted.tar
            '''))
     parser.add_argument('-m', '--masterkey', required=True, help='file containing master key')
+    parser.add_argument('-u', '--url', required=True, help='url location')
+    parser.add_argument('-o', '--outfile', required=True, help='output file')
     if len(sys.argv)==1:
         parser.print_help()
         sys.exit(1)
-    parser.add_argument('-u', '--url', required=True, help='url location')
-    parser.add_argument('-o', '--outfile', required=True, help='output file')
     return parser
 
 def download_encrypted_file(key_path, url, file_path):
